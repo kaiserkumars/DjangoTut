@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Login</title>
-	
-	{% load static %}
-	<link rel="stylesheet" type="text/css" href="{% static 'accounts/style.css' %}">
-</head>
-<body>
-	<div class="container jumbotron">
-		Welcome! You can login here.
-		<button class="btn btn-success" type="button" name="button">Login</button>
-	</div>
-	<h1>{{myName}}</h1>
-	<ul>
-		{% for number in numbers %}
-		<li>{{number}}</li>
-		{% endfor %}
-	</ul>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+<h1>Welcome</h1>
+<p>You can Login here!</p>
+<h2>Login</h2>
+<form method="post"> <!-- Django needs cross site request forgery token (CSRF)  to make sure that the data submitted through the form is secure and is less susceptible to malicious attacks  -->
+	{% csrf_token %}
+	{{ form.as_p }} <!-- form rendered as paragraph(p). We will get option to enter username and password, also the bootstrap is working from base.html-->
+	<button type="submit">Login</button>
+</form>
+</div> 
+{% endblock %}
